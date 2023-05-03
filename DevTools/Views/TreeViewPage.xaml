@@ -24,16 +24,53 @@
                 <TabViewItem Header="Text" FontSize="20" IsClosable="False"
                              VerticalAlignment="Stretch">
                     <Grid>
-                        <TextBox TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" HorizontalAlignment="Stretch" TextChanged="TextBox_OnTextChanged"
-                                 VerticalAlignment="Stretch" />
-                        <InfoBar VerticalAlignment="Bottom"
-                            IsOpen="{x:Bind ViewModel.MessageInfos.IsOpen,Mode=OneWay}"
-                            Severity="Error"
-                            Title="Error"
-                            Message="{x:Bind ViewModel.MessageInfos.Message,Mode=OneWay}" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <CommandBar Background="Transparent" IsOpen="False" HorizontalAlignment="Left"
+                                        DefaultLabelPosition="Right">
+                                <AppBarButton Icon="Copy" Label="Copy" />
+                                <AppBarButton Icon="Paste" Label="Paste" />
+                                <AppBarSeparator />
+                                <AppBarButton Label="Format" />
+                                <AppBarButton Label="Compress" />
+                                <AppBarSeparator />
+                                <AppBarButton Label="Json2Code">
+                                    <AppBarButton.Flyout>
+                                        <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                                            <MenuFlyoutItem Text="C#">
+                                                <MenuFlyoutItem.Icon>
+                                                    <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                                              Glyph="&#xEC4E;" />
+                                                </MenuFlyoutItem.Icon>
+                                            </MenuFlyoutItem>
+                                            <MenuFlyoutItem Text="Java">
+                                                <MenuFlyoutItem.Icon>
+                                                    <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                                              Glyph="&#xE721;" />
+                                                </MenuFlyoutItem.Icon>
+                                            </MenuFlyoutItem>
+                                            <MenuFlyoutItem Icon="Globe" Text="Go" />
+                                        </MenuFlyout>
+                                    </AppBarButton.Flyout>
+                                </AppBarButton>
+                            </CommandBar>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <TextBox TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                     AcceptsReturn="True" HorizontalAlignment="Stretch"
+                                     TextChanged="TextBox_OnTextChanged"
+                                     VerticalAlignment="Stretch" />
+                            <InfoBar VerticalAlignment="Bottom"
+                                     IsOpen="{x:Bind ViewModel.MessageInfos.IsOpen,Mode=OneWay}"
+                                     Severity="Error"
+                                     Title="Error"
+                                     Message="{x:Bind ViewModel.MessageInfos.Message,Mode=OneWay}" />
+                        </Grid>
                     </Grid>
-
-
                 </TabViewItem>
             </TabView.TabItems>
         </TabView>
