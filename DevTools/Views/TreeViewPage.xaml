@@ -1,0 +1,43 @@
+<!-- Copyright (c) Microsoft Corporation and Contributors. -->
+<!-- Licensed under the MIT License. -->
+
+<Page
+    x:Class="DevTools.Views.TreeViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:behaviors="using:DevTools.Behaviors"
+    behaviors:NavigationViewHeaderBehavior.HeaderMode="Never"
+    mc:Ignorable="d">
+
+
+    <Grid>
+        <TabView Name="TabView" SelectedIndex="0" VerticalAlignment="Stretch" IsAddTabButtonVisible="False"
+
+                 AddTabButtonClick="TabView_AddTabButtonClick"
+                 TabCloseRequested="TabView_TabCloseRequested">
+            <TabView.TabItems>
+                <TabViewItem Header="Viewer" FontSize="20" IsClosable="False">
+                    <TreeView Name="treeView" CanDragItems="True" AllowDrop="True" />
+                </TabViewItem>
+                <TabViewItem Header="Text" FontSize="20" IsClosable="False"
+                             VerticalAlignment="Stretch">
+                    <Grid>
+                        <TextBox TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" HorizontalAlignment="Stretch" TextChanged="TextBox_OnTextChanged"
+                                 VerticalAlignment="Stretch" />
+                        <InfoBar VerticalAlignment="Bottom"
+                            IsOpen="{x:Bind ViewModel.MessageInfos.IsOpen,Mode=OneWay}"
+                            Severity="Error"
+                            Title="Error"
+                            Message="{x:Bind ViewModel.MessageInfos.Message,Mode=OneWay}" />
+                    </Grid>
+
+
+                </TabViewItem>
+            </TabView.TabItems>
+        </TabView>
+
+    </Grid>
+
+</Page>
