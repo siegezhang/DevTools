@@ -8,17 +8,52 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:behaviors="using:DevTools.Behaviors"
+    xmlns:ui="using:Windows.UI"
     behaviors:NavigationViewHeaderBehavior.HeaderMode="Never"
     mc:Ignorable="d">
 
 
     <Grid>
-        <TabView Name="TabView" SelectedIndex="0" VerticalAlignment="Stretch" IsAddTabButtonVisible="False"
-
+        <TabView Name="TabView" SelectedIndex="0" VerticalAlignment="Stretch"
+                 IsAddTabButtonVisible="False"
                  AddTabButtonClick="TabView_AddTabButtonClick"
                  TabCloseRequested="TabView_TabCloseRequested">
+            <!-- <TabView.Resources> -->
+            <!--     <ResourceDictionary> -->
+            <!--         <SolidColorBrush x:Key="TabViewItemHeaderBackgroundSelected" Color="Aquamarine" /> -->
+            <!--     </ResourceDictionary> -->
+            <!-- </TabView.Resources> -->
+            <!-- <TabView.Resources> -->
+            <!--     <ResourceDictionary> -->
+            <!--         <Style TargetType="TabViewItem"> -->
+            <!--             <Setter Property="Foreground" Value="Blue" /> -->
+            <!--         </Style> -->
+            <!--         <ResourceDictionary.ThemeDictionaries> -->
+            <!--             <ResourceDictionary x:Key="Light"> -->
+            <!--                 <SolidColorBrush x:Key="TabViewItemHeaderBackground" Color="LightGreen" /> -->
+            <!--                 <x:Double x:Key="TabViewItemHeaderFontSize">23</x:Double> -->
+            <!--                 ~1~ Why doesn't this one work? @1@ -->
+            <!--                 <SolidColorBrush x:Key="TabViewItemHeaderForeground" Color="Blue" /> -->
+            <!--             </ResourceDictionary> -->
+            <!--             <ResourceDictionary x:Key="Dark"> -->
+            <!--                 <SolidColorBrush x:Key="TabViewBackground" Color="{ThemeResource SystemAccentColorDark2}" /> -->
+            <!--             </ResourceDictionary> -->
+            <!--         </ResourceDictionary.ThemeDictionaries> -->
+            <!--     </ResourceDictionary> -->
+            <!-- </TabView.Resources> -->
+            <TabView.Resources>
+                <ResourceDictionary>
+                    <ui:Color x:Key="BackgroundColor">#cc000000</ui:Color>
+                    <ui:Color x:Key="ItemHeaderBackgroundColor">#00000000</ui:Color>
+                    <StaticResource x:Key="TabViewBackground"
+                                    ResourceKey="BackgroundColor" />
+                    <StaticResource x:Key="TabViewItemHeaderBackground"
+                                    ResourceKey="ItemHeaderBackgroundColor" />
+                </ResourceDictionary>
+            </TabView.Resources>
             <TabView.TabItems>
-                <TabViewItem Header="Viewer" FontSize="20" IsClosable="False">
+                <TabViewItem Header="Viewer" FontSize="20"
+                             IsClosable="False">
                     <TreeView Name="treeView" CanDragItems="True" AllowDrop="True" />
                 </TabViewItem>
                 <TabViewItem Header="Text" FontSize="20" IsClosable="False"
