@@ -56,7 +56,7 @@
                              IsClosable="False">
                     <TreeView Name="treeView" CanDragItems="True" AllowDrop="True" />
                 </TabViewItem>
-                <TabViewItem Header="Text" FontSize="20" IsClosable="False"
+                <TabViewItem Header="Text" FontSize="20" IsClosable="False" IsSelected="True"
                              VerticalAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -67,11 +67,11 @@
                         <Grid Grid.Row="0">
                             <CommandBar Background="Transparent" IsOpen="False" HorizontalAlignment="Left"
                                         DefaultLabelPosition="Right">
-                                <AppBarButton Icon="Copy" Label="Copy" />
-                                <AppBarButton Icon="Paste" Label="Paste" />
+                                <AppBarButton Icon="Copy" Label="Copy" Click="CopyBarButton_Click" />
+                                <AppBarButton Icon="Paste" Label="Paste" Click="PastyBarButton_Click" />
                                 <AppBarSeparator />
-                                <AppBarButton Label="Format" />
-                                <AppBarButton Label="Compress" />
+                                <AppBarButton Label="Format" Click="FormatBarButton_Click" />
+                                <AppBarButton Label="Compress" Click="CompressBarButton_Click"/>
                                 <AppBarSeparator />
                                 <AppBarButton Label="Json2Code">
                                     <AppBarButton.Flyout>
@@ -95,7 +95,8 @@
                             </CommandBar>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <TextBox TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                            <TextBox Name="JsonTextBox" TextWrapping="Wrap"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                                      AcceptsReturn="True" HorizontalAlignment="Stretch"
                                      TextChanged="TextBox_OnTextChanged"
                                      VerticalAlignment="Stretch" />
@@ -109,7 +110,5 @@
                 </TabViewItem>
             </TabView.TabItems>
         </TabView>
-
     </Grid>
-
 </Page>

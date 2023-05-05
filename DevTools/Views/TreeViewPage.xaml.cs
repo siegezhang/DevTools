@@ -1,11 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
-using System.Text.Json;
 using System.Text.Json.Nodes;
+using Windows.ApplicationModel.DataTransfer;
 using DevTools.Core.Models;
 using DevTools.ViewModels;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using JsonException = System.Text.Json.JsonException;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -112,7 +116,6 @@ public sealed partial class TreeViewPage : Page
         {
             return;
         }
-
         JsonNode node;
         try
         {
@@ -143,5 +146,32 @@ public sealed partial class TreeViewPage : Page
         }
 
         treeView.RootNodes.Add(myTreeViewNode);
+    }
+
+    private void CopyBarButton_Click(object sender, RoutedEventArgs e)
+    {
+        Console.WriteLine(JsonTextBox.Text);
+        var package = new DataPackage();
+        package.SetText(JsonTextBox.Text);
+        Clipboard.SetContent(package);
+    }
+
+    private async void PastyBarButton_Click(object sender, RoutedEventArgs e)
+    {
+        var package = Clipboard.GetContent();
+        if (package.Contains(StandardDataFormats.Text))
+        {
+             JsonTextBox.Text = await package.GetTextAsync();
+        }
+    }
+
+    private void FormatBarButton_Click(object sender, RoutedEventArgs e)
+    {
+        JsonTextBox.Text = JObject.Parse(JsonTextBox.Text).ToString();
+    }
+
+    private void CompressBarButton_Click(object sender, RoutedEventArgs e)
+    {
+        JsonTextBox.Text = JObject.Parse(JsonTextBox.Text).ToString(Formatting.None);
     }
 }
