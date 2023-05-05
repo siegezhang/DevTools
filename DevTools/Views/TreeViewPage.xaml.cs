@@ -112,7 +112,7 @@ public sealed partial class TreeViewPage : Page
         treeView.RootNodes.Clear();
         string jsonText = (sender as TextBox).Text;
         Console.WriteLine($"jsonText:{jsonText}");
-        if (jsonText.Equals(String.Empty))
+        if (string.IsNullOrWhiteSpace(jsonText))
         {
             return;
         }
@@ -167,11 +167,37 @@ public sealed partial class TreeViewPage : Page
 
     private void FormatBarButton_Click(object sender, RoutedEventArgs e)
     {
-        JsonTextBox.Text = JObject.Parse(JsonTextBox.Text).ToString();
+        if (string.IsNullOrWhiteSpace(JsonTextBox.Text))
+        {
+            return;
+        }
+        try
+        {
+            JsonTextBox.Text = JObject.Parse(JsonTextBox.Text).ToString();
+        }
+        catch (JsonReaderException exception)
+        {
+            ViewModel.MessageInfos = new MessageInfo()
+            {
+                IsOpen = true,
+                Message = exception.ToString()
+            };
+        }
     }
 
     private void CompressBarButton_Click(object sender, RoutedEventArgs e)
     {
-        JsonTextBox.Text = JObject.Parse(JsonTextBox.Text).ToString(Formatting.None);
+        try
+        {
+            JsonTextBox.Text = JObject.Parse(JsonTextBox.Text).ToString(Formatting.None);
+        }
+        catch (JsonReaderException exception)
+        {
+            ViewModel.MessageInfos = new MessageInfo()
+            {
+                IsOpen = true,
+                Message = exception.ToString()
+            };
+        }
     }
 }
