@@ -200,4 +200,13 @@ public sealed partial class TreeViewPage : Page
             };
         }
     }
+
+    private void CSharpBarButton_Click(object sender, RoutedEventArgs e)
+    {
+        TabView.TabItems.Add(new TabViewItem()
+        {
+            IsSelected = true,
+            Header = "JSON C# Class Generator"
+        });
+    }
 }

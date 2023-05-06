@@ -76,7 +76,7 @@
                                 <AppBarButton Label="Json2Code">
                                     <AppBarButton.Flyout>
                                         <MenuFlyout Placement="BottomEdgeAlignedLeft">
-                                            <MenuFlyoutItem Text="C#">
+                                            <MenuFlyoutItem Text="C#" Click="CSharpBarButton_Click">
                                                 <MenuFlyoutItem.Icon>
                                                     <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                                               Glyph="&#xEC4E;" />
