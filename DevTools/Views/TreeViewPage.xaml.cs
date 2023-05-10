@@ -50,8 +50,8 @@ public sealed partial class TreeViewPage : Page
             }
             else
             {
-                TreeViewNode t = new TreeViewNode() { Content = e.ToString() };
-                treeViewNode.Children.Add(t);
+                t1.Content = t1.Content + ":" + e;
+                treeViewNode.Children.Add(t1);
             }
         }
     }
