@@ -34,15 +34,18 @@ public sealed partial class TreeViewPage : Page
 
     private void IterateJsonArray(JsonArray jsonArray, TreeViewNode treeViewNode)
     {
-        foreach (var e in jsonArray)
+        for (var index = 0; index < jsonArray.Count; index++)
         {
+            TreeViewNode t1 = new TreeViewNode { Content = "item["+index+"]" };
+            treeViewNode.Children.Add(t1);
+            var e = jsonArray[(Index)index];
             if (e is JsonObject)
             {
-                IterateJsonObject(e.AsObject(), treeViewNode);
+                IterateJsonObject(e.AsObject(), t1);
             }
             else if (e is JsonArray)
             {
-                IterateJsonArray(e.AsArray(), treeViewNode);
+                IterateJsonArray(e.AsArray(), t1);
             }
             else
             {
