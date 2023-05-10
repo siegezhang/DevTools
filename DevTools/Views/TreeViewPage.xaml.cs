@@ -50,8 +50,7 @@ public sealed partial class TreeViewPage : Page
             }
             else
             {
-                t1.Content = t1.Content + ":" + e;
-                treeViewNode.Children.Add(t1);
+                t1.Content +=  " : " + e;
             }
         }
     }
@@ -207,10 +206,14 @@ public sealed partial class TreeViewPage : Page
 
     private void CSharpBarButton_Click(object sender, RoutedEventArgs e)
     {
-        TabView.TabItems.Add(new TabViewItem()
+        Frame frame = new Frame();
+        frame.Navigate(typeof(CSharpSourceGeneratorPage));
+        var newItem = new TabViewItem
         {
             IsSelected = true,
             Header = "JSON C# Class Generator"
-        });
+        };
+        newItem.Content = frame;
+        TabView.TabItems.Add(newItem);
     }
 }
