@@ -197,6 +197,10 @@ public sealed partial class TreeViewPage : Page
 
     private void CompressBarButton_Click(object sender, RoutedEventArgs e)
     {
+        if (string.IsNullOrWhiteSpace(JsonTextBox.Text))
+        {
+            return;
+        }
         try
         {
             if (JsonTextBox.Text.Trim().StartsWith("["))
