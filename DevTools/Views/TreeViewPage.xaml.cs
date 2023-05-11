@@ -176,7 +176,14 @@ public sealed partial class TreeViewPage : Page
         }
         try
         {
+            if (JsonTextBox.Text.Trim().StartsWith("["))
+            {
+                JsonTextBox.Text = JArray.Parse(JsonTextBox.Text).ToString();
+            }
+            else
+            {
             JsonTextBox.Text = JObject.Parse(JsonTextBox.Text).ToString();
+            }
         }
         catch (JsonReaderException exception)
         {
@@ -192,7 +199,15 @@ public sealed partial class TreeViewPage : Page
     {
         try
         {
-            JsonTextBox.Text = JObject.Parse(JsonTextBox.Text).ToString(Formatting.None);
+            if (JsonTextBox.Text.Trim().StartsWith("["))
+            {
+                JsonTextBox.Text = JArray.Parse(JsonTextBox.Text).ToString(Formatting.None);
+            }
+            else
+            {
+                JsonTextBox.Text = JObject.Parse(JsonTextBox.Text).ToString(Formatting.None);
+            }
+
         }
         catch (JsonReaderException exception)
         {
