@@ -67,6 +67,7 @@
                         <Grid Grid.Row="0">
                             <CommandBar Background="Transparent" IsOpen="False" HorizontalAlignment="Left"
                                         DefaultLabelPosition="Right">
+                                <AppBarButton Icon="Clear" Label="Clear" Click="ClearBarButton_Click" />
                                 <AppBarButton Icon="Copy" Label="Copy" Click="CopyBarButton_Click" />
                                 <AppBarButton Icon="Paste" Label="Paste" Click="PastyBarButton_Click" />
                                 <AppBarSeparator />

@@ -153,7 +153,10 @@ public sealed partial class TreeViewPage : Page
 
     private void CopyBarButton_Click(object sender, RoutedEventArgs e)
     {
-        Console.WriteLine(JsonTextBox.Text);
+        if (string.IsNullOrWhiteSpace(JsonTextBox.Text))
+        {
+            return;
+        }
         var package = new DataPackage();
         package.SetText(JsonTextBox.Text);
         Clipboard.SetContent(package);
@@ -164,7 +167,12 @@ public sealed partial class TreeViewPage : Page
         var package = Clipboard.GetContent();
         if (package.Contains(StandardDataFormats.Text))
         {
-             JsonTextBox.Text = await package.GetTextAsync();
+             var value= await package.GetTextAsync();
+             if (string.IsNullOrWhiteSpace(value))
+             {
+                 return;
+             }
+             JsonTextBox.Text = value;
         }
     }
 
@@ -234,5 +242,10 @@ public sealed partial class TreeViewPage : Page
         };
         newItem.Content = frame;
         TabView.TabItems.Add(newItem);
+    }
+
+    private void ClearBarButton_Click(object sender, RoutedEventArgs e)
+    {
+        JsonTextBox.Text = null;
     }
 }
